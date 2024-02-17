@@ -17,7 +17,7 @@ body {
   height: auto;
 }
 
-#display {
+#display-container {
   position: relative;
   width: auto;
   height: 100px;
@@ -25,7 +25,7 @@ body {
   background-color: darkgrey;
   color: black;
 }
-#display > div {
+#display-container > div {
   font: 3.5rem "Fira Sans", sans-serif;
   position: absolute;
   bottom: 0;

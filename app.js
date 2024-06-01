@@ -56,15 +56,10 @@ const clearButton = document.getElementById("clear");
 
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
-    if (op != undefined) {
-      displayValue.textContent = "";
-      b = b += number.textContent;
-    } else if (op === undefined) {
-      displayValue.textContent = "";
-      a = a += number.textContent;
-    } else if (result > 0 && op != undefined) {
-      displayValue.textContent = "";
-      b = b += number.textContent;
+    if (op) {
+      b += number.textContent;
+    } else {
+      a += number.textContent;
     }
     console.log(a, b);
   });

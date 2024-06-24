@@ -2,7 +2,6 @@ let a = "";
 let b = "";
 let result = 0;
 let op = undefined;
-let shouldResetOperation = false;
 
 const add = function (a, b) {
   return a + b;
@@ -89,7 +88,6 @@ equalsButton.addEventListener("click", () => {
     b = "";
     op = undefined;
   }
-  //result = operate(a, b, op);
   console.log("equals");
   console.log(`${a} ${op} ${b} = ${result}`);
 });

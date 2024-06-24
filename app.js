@@ -2,6 +2,7 @@ let a = "";
 let b = "";
 let result = 0;
 let op = undefined;
+let shouldResetOperation = false;
 
 const add = function (a, b) {
   return a + b;
@@ -19,15 +20,18 @@ const divide = function (a, b) {
   return a / b;
 };
 
-const evaluate = function (a, b, op) {
+const operate = function (a, b, op) {
   a = parseFloat(a);
   b = parseFloat(b);
   if (op === "add") return add(a, b);
+  if (op === "subtract") return subtract(a, b);
+  if (op === "multiply") return multiply(a, b);
+  if (op === "divide") return divide(a, b);
 };
 
 function setOperator(operator) {
   if (op && b) {
-    result = evaluate(a, b, op);
+    result = operate(a, b, op);
     displayValue.textContent = result;
     a = result;
     b = "";
@@ -40,7 +44,7 @@ function setOperator(operator) {
 function resetOperation() {
   a = "";
   b = "";
-  result = 0;
+  result = "";
   op = undefined;
   displayValue.textContent = "0";
 }
@@ -51,15 +55,17 @@ const multiplyButton = document.getElementById("multiply");
 const divideButton = document.getElementById("divide");
 const equalsButton = document.getElementById("equals");
 const numbers = document.querySelectorAll(".number");
-let displayValue = document.getElementById("value");
+const displayValue = document.getElementById("value");
 const clearButton = document.getElementById("clear");
 
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
     if (op) {
       b += number.textContent;
+      displayValue.textContent = b;
     } else {
       a += number.textContent;
+      displayValue.textContent = a;
     }
     console.log(a, b);
   });
@@ -71,16 +77,19 @@ clearButton.addEventListener("click", () => {
 });
 
 addButton.addEventListener("click", () => setOperator("add"));
+subtractButton.addEventListener("click", () => setOperator("subtract"));
+multiplyButton.addEventListener("click", () => setOperator("multiply"));
+divideButton.addEventListener("click", () => setOperator("divide"));
 
 equalsButton.addEventListener("click", () => {
   if (op && b) {
-    result = evaluate(a, b, op);
+    result = operate(a, b, op);
     displayValue.textContent = result;
     a = result;
     b = "";
     op = undefined;
   }
-  //result = evaluate(a, b, op);
+  //result = operate(a, b, op);
   console.log("equals");
   console.log(`${a} ${op} ${b} = ${result}`);
 });
